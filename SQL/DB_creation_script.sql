@@ -1,0 +1,1 @@
+/*Here will put all thesql creation script after export from php my admin*/
