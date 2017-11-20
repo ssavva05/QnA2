@@ -19,7 +19,7 @@ and open the template in the editor.
     <body>
         <?php
         // put your code here
-        alert("ok");
+        //echo ("ok");
         ?>
         <form class="form-signin">
         <h2 class="form-signin-heading">Please sign in</h2>
