@@ -41,17 +41,24 @@ class EnrollForm extends DbConn
             $success = "<div class=\"alert alert-danger alert-dismissable\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button>Maximum number of login attempts exceeded... please wait ".$timeout_minutes." minutes before logging in again</div>";
 
         } else {
-
-             //If max attempts not exceeded, continue
-            // Checks password entered against db password hash
+			
+			//check if the active row is 0 or not or if the result is empty
             if (($result != NULL)&&($result != "")&&($result != '')&&($result != " ")&&($result != ' ')) {
+				
+				//check for non activated
+				if (($result['active'] == 0)){
+				$success = "<div class=\"alert alert-danger alert-dismissable\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button>Expired enrollment key </div>";
+				}
 
-                //Success! Register $myenrollkey, $mypassword and return "true"
+				else{
+                //Success! Register $myenrollkey,and return "true"
                 $success = 'true';
                     session_start();
 
                     $_SESSION['enroll_key'] = $myenrollkey;
+				}
 			}
+			 
 			else{
 				$success = "<div class=\"alert alert-danger alert-dismissable\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button>Wrong enrollment key </div>";	
 			}
@@ -60,23 +67,6 @@ class EnrollForm extends DbConn
 			return $success;
 		}
 		
-		
-		/*
-			elseif (password_verify($mypassword, $result['password']) && $result['verified'] == '0') {
-
-                //Account not yet verified
-                $success = "<div class=\"alert alert-danger alert-dismissable\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button>Your account has been created, but you cannot log in until it has been verified</div>";
-
-            } else {
-
-                //Wrong enroll_key or password
-                $success = "<div class=\"alert alert-danger alert-dismissable\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button>Wrong enroll_key or Password</div>";
-
-            }
-        }
-        return $success;
-    }
-*/
     public function insertAttempt($enroll_key)
     {
         try {
