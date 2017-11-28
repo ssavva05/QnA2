@@ -96,8 +96,8 @@ try {
                 
                 <input type="submit" name = "submit sellected">
                 <input >-->
-                
-                
+
+
                 <!-- <div class="row">
         <div class="col-md-2 col-md-offset-4">2</div>
         <div class="col-md-2">2</div>
@@ -106,48 +106,54 @@ try {
                 <div class ="row" >
                     <div class="col-md-3 col-md-offset-3">
                         <h4 class="text-justify">
-                                        Question1    g d  fdfdsfsdfsdf ssd f ds sd fsd 
-                                        f sdf sd fsf dsad asd asda sdas  dasd asd as as sda
-                                        f sdf sd fsf dsad asd asda sdas 
-                                        f sdf sd fsf dsad asd asda sdas f sdf sd fsf dsad asd asda sdas 
-                                        f sdf sd fsf dsad asd asda sdas 
-                                        
-                                    </h4>
-                                
-                        </div>
-                        <div class="col-md-3">
-                                <label class="switch">
-                                    <input type="checkbox" id="question1">
-                                    <span class="slider round"></span>
-                                </label>
-                     </div>
+                            Question1    g d  fdfdsfsdfsdf ssd f ds sd fsd 
+                            f sdf sd fsf dsad asd asda sdas  dasd asd as as sda
+                            f sdf sd fsf dsad asd asda sdas 
+                            f sdf sd fsf dsad asd asda sdas f sdf sd fsf dsad asd asda sdas 
+                            f sdf sd fsf dsad asd asda sdas 
+
+                        </h4>
+
+                    </div>
+                    <div class="col-md-3">
+                        <label class="switch">
+                            <input type="checkbox" id="question1">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
                 </div>
-                
+
                 <hr >
                 <div class ="row" >
-                   <div class="col-md-3 col-md-offset-3">
-                                    <h4 class="text-justify">
-                                        Question2 dfgh jearsdtf hgsadfghj fds csdf dfgdgdf gdf dgfd fg f  s s sads
-                                        ds csdf dfgdgdf gdf dgfd fg ds csdf dfgdgdf gdf dgfd fg ds csdf dfgdgdf gdf dgfd fg 
-                                    </h4>  
-                        </div>
-                        <div class="col-md-3">
-                                <label class="switch">
-                                    <input type="checkbox" id="question1">
-                                    <span class="slider round"></span>
-                                </label>
-                       </div>
+                    <div class="col-md-3 col-md-offset-3">
+                        <h4 class="text-justify">
+                            Question2 dfgh jearsdtf hgsadfghj fds csdf dfgdgdf gdf dgfd fg f  s s sads
+                            ds csdf dfgdgdf gdf dgfd fg ds csdf dfgdgdf gdf dgfd fg ds csdf dfgdgdf gdf dgfd fg 
+                        </h4>  
+                    </div>
+                    <div class="col-md-3">
+                        <label class="switch">
+                            <input type="checkbox" id="question1">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
                 </div>
-                <div class ="row" >
-                    <input type="submit" value="Apply">
+                <hr >
+                <div class ="row" ></div>
+                <div class="col-xs-1 col-xs-offset-3">
+                    <input class="btn btn-success active btn-lg" type="submit" value="Apply">
                 </div>
             </form> 
-
-
-
-            <button  onclick="uncheckAll();">un-check all questions </button>
-            <button  onclick="checkAll();">check all questions</button>
-
+            
+            <div class="col-xs-offset-2 col-xs-1">
+                <div class ="row" >
+                    <button type="button" class="btn btn-warning active btn-lg " onclick="uncheckAll();">un-check </button>
+                </div>
+                <br />
+                <div class ="row" >
+                    <button type="button" class="btn btn-info active btn-lg" onclick="checkAll();">check </button>
+                </div>
+            </div>
 
 
         </div>

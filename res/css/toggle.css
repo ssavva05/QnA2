@@ -53,3 +53,24 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+.btn-success:active:focus {
+  color: #1783c6; 
+  background-color: #a8c7db; 
+  border-color: #494F57;
+}
+
+.btn-info:active:focus {
+  color: #1783c6; 
+  background-color: #a8c7db; 
+  border-color: #494F57;
+}
+.btn-default:active:focus {
+  color: #1783c6; 
+  background-color: #a8c7db; 
+  border-color: #494F57;
+}
+.btn-warning:active:focus {
+  color: #1783c6; 
+  background-color: #a8c7db; 
+  border-color: #494F57;
+}
