@@ -74,3 +74,7 @@ input:checked + .slider:before {
   background-color: #a8c7db; 
   border-color: #494F57;
 }
+
+.v1{
+     margin-left: 1.5em;
+}

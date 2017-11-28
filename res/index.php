@@ -144,19 +144,19 @@ try {
                     <input class="btn btn-success active btn-lg" type="submit" value="Apply">
                 </div>
             </form> 
-            
-            <div class="col-xs-offset-2 col-xs-1">
-                <div class ="row" >
-                    <button type="button" class="btn btn-warning active btn-lg " onclick="uncheckAll();">un-check </button>
-                </div>
-                <br />
-                <div class ="row" >
-                    <button type="button" class="btn btn-info active btn-lg" onclick="checkAll();">check </button>
-                </div>
+
+
+            <div class="col-xs-1 col-xs-offset-2 "><div class= "v1">
+                    <div class ="row" >
+                        <button type="button" class="btn btn-info active btn-lg" onclick="checkAll();">Check All </button>
+                    </div>
+                    <br />
+                    <div class ="row" >
+                        <button type="button" class="btn btn-warning active btn-lg " onclick="uncheckAll();">Un-Check All </button>
+                    </div> </div>
+
+
             </div>
-
-
-        </div>
     </body>
 </html>
 
