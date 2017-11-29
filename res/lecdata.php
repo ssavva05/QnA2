@@ -14,7 +14,7 @@ if (empty($temptab)) {
     define('DB_HOST', 'localhost');
     define('DB_USERNAME', 'root');
     define('DB_PASSWORD', 'root');
-    define('DB_NAME', 'mydb');
+    define('DB_NAME', 'qnadb');
 
 //get connection
     $mysqli = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_NAME);

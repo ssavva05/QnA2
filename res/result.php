@@ -43,7 +43,7 @@ try {
         <link href="../css/bootstrap.css" rel="stylesheet" type="text/css">
         <link href="./css/style.css" rel="stylesheet" type="text/css">
         <link href="./css/toggle.css" rel="stylesheet" type="text/css">
-        
+
     </head>
 
 
@@ -55,96 +55,79 @@ try {
                 </div>
             </div>
 
-       
 
 
 
-<?php
+
+            <?php
 // SELECT qid,textofquestion,seen,textofanswer FROM `question` WHERE lid=1 
 //Find specific results for each question    
-$stmt = $db->conn->prepare("SELECT qid,textofquestion,seen,textofanswer  FROM " . $tbl_quest . " WHERE lid = :lectureID");
-$stmt->bindParam(':lectureID', $lectureID);
-$stmt->execute();
+            $stmt = $db->conn->prepare("SELECT qid,textofquestion,seen,textofanswer  FROM " . $tbl_quest . " WHERE lid = :lectureID");
+            $stmt->bindParam(':lectureID', $lectureID);
+            $stmt->execute();
 
 // Gets query result
-$result = $stmt->fetch(PDO::FETCH_ASSOC);
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-$i = 0;
-?>
-
-            <form id="checkform" action="index.php"  method="post">
-<?php
-while ($result != NULL && $result != "" && $result != " " && (isset($result))) {
-
-    $temp = new ArrayObject();
-    foreach ($result as $key => $value) {
-        $i++;
-        //echo "Key: $key; Value: $value\n";
-        // echo($key . "=" . $value . "<br />");
-        $temp[$key] = $value;
-
-        if ($i == 4) {
-            //echo("<br />");
+            $i = 0;
             ?>
-                <form id="checkform" action="data.php"  method="post">
+
+
+            <?php
+            while ($result != NULL && $result != "" && $result != " " && (isset($result))) {
+                $tqid;
+                $temp = new ArrayObject();
+                foreach ($result as $key => $value) {
+                    $i++;
+                    //echo "Key: $key; Value: $value\n";
+                    // echo($key . "=" . $value . "<br />");
+                    $temp[$key] = $value;
+
+                    if ($i == 1) {
+                        $tqid = $value;
+                    }
+
+                    if ($i == 4) {
+                        //echo("<br />");
+                        ?>
+                        <form id="checkform" action="chart.php"  method="post">
                             <hr >
                             <div class ="row" >
                                 <div class="col-md-3 col-md-offset-3">
                                     <h4 class="text-justify">
-            <?= $temp['textofquestion'] ?>
+                                        <?= $temp['textofquestion'] ?>
                                     </h4>
 
                                 </div>
 
-            <?php
-            if ($temp['seen'] == 1) {
-                ?>
-                                    <div class="col-md-3">
-                                        <label class="switch">
-                                            <input type='hidden' value='0' name =<?= $temp['qid'] ?>>
-                                            <input type="checkbox" value='1' name =<?= $temp['qid'] ?> checked="checked" id=<?= $temp['qid'] ?>>
-                                            <span class="slider round"></span>
-                                        </label>
-                                    </div>
+                                <div class="col-md-3">
+                                    <input type="hidden" name=<?= $tqid ?> value=<?= $tqid ?>>
+                                    <input class="btn btn-success active btn-lg" type="submit" value="Show Statisctics">
+                                </div>
 
-
-                <?php
-            } else {
-                ?>
-                                    <div class="col-md-3">
-                                        <label class="switch">
-                                            <input type='hidden' value='0' name =<?= $temp['qid'] ?>>
-                                            <input type="checkbox" value='1' name=<?= $temp['qid'] ?> id=<?= $temp['qid'] ?>>
-                                            <span class="slider round"></span>
-                                        </label>
-                                    </div>
-
-
-            <?php } ?>     
                             </div>
-                            </form> 
-                                <?php
-                                $i = 0;
-                            }
-                        }
-                        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                        </form> 
+                        <?php
+                        $i = 0;
                     }
-                    ?>
+                }
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            }
+            ?>
 
-                <hr >
-                <div class ="row" ></div>
-                <div class="col-xs-1 col-xs-offset-3">
-                    <input class="btn btn-success active btn-lg" type="submit" value="Apply">
-                </div>
-            
+
+
 
 
             <div class="col-xs-1 col-xs-offset-2 "><div class= "v1">
-                    <div class ="row" >
-                        <button type="button" class="btn btn-info active btn-lg" onclick="">Show  Overall lecture results  </button>
-                    </div>
+                    <form id="checkform" action="lecdata.php"  method="post">
+                        <div class ="row" >
+                            <input type="hidden" name=<?= $lectureID ?> value=<?= $lectureID ?>>
+                            <button type="button" type="submit" class="btn btn-info active btn-lg" onclick="">Show Overall lecture Statistics  </button>
+                        </div>
+                    </form>
                     <br />
-                    
+
                 </div>
             </div>
 

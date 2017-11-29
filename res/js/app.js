@@ -9,7 +9,7 @@ function getRandomColor() {
 
 $(document).ready(function(){
 	$.ajax({
-		url: "http://localhost/QnA/res/lecdata.php",
+		url: "http://localhost/QnA/res/data.php",
 		method: "GET",
 		success: function(data) {
 			//console.log(data);
@@ -19,8 +19,8 @@ $(document).ready(function(){
 			
 
 			for(var i in data) {
-				player.push("Answer:" + data[i].playerid);
-				score.push(data[i].score);
+				player.push("Answer:" + data[i].textofanswer);
+				score.push(data[i].counter);
 				color.push(getRandomColor());
 			}
 

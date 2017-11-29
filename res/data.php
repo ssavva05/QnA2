@@ -10,11 +10,25 @@ if (empty($temptab)) {
 //setting header to json
     header('Content-Type: application/json');
 
+ 
+    $tbl_quest = "question";
+    $tbl_ans = "answer";
+//print_r($temptab);
+
+    foreach ($temptab as $key => $value) {
+        $qid = $value;
+    }
+
+  
+    //$stmt = $db->conn->prepare("SELECT textofanswer, counter FROM " . $tbl_ans . " WHERE qid = :quesID ORDER BY qid");
+   
+ 
+
 //database
     define('DB_HOST', 'localhost');
     define('DB_USERNAME', 'root');
     define('DB_PASSWORD', 'root');
-    define('DB_NAME', 'mydb');
+    define('DB_NAME', 'qnadb');
 
 //get connection
     $mysqli = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_NAME);
@@ -24,7 +38,7 @@ if (empty($temptab)) {
     }
 
 //query to get data from the table
-    $query = sprintf("SELECT playerid, score FROM score ORDER BY playerid");
+    $query = sprintf("SELECT textofanswer, counter FROM " . $tbl_ans . " WHERE qid =".$qid);
 
 //execute query
     $result = $mysqli->query($query);
@@ -43,5 +57,9 @@ if (empty($temptab)) {
 
     unset($_POST);
 //now print the data
+    //bridge
     print json_encode($data);
+    //kaleis to consumer to js
+    
+    
 }

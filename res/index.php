@@ -43,9 +43,9 @@ try {
         <link href="../css/bootstrap.css" rel="stylesheet" type="text/css">
         <link href="./css/style.css" rel="stylesheet" type="text/css">
         <link href="./css/toggle.css" rel="stylesheet" type="text/css">
-        <script src="js/Chart.bundle.js" type="text/javascript"></script>
-        <script src="js/utils.js" type="text/javascript"></script>
-        <script src="js/jquery-2.2.4.min.js" type="text/javascript"></script>
+        <!--<script src="js/Chart.bundle.js" type="text/javascript"></script>
+        <script src="js/utils.js" type="text/javascript"></script>-->
+        <script src="js/jquery.min.js" type="text/javascript"></script>
         <script>
             function uncheckAll() {
                 $('input[type="checkbox"]:checked').prop('checked', false);
