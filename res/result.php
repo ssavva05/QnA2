@@ -21,61 +21,27 @@ session_start();
         <script src="js/utils.js" type="text/javascript"></script>
         <script src="js/jquery-2.2.4.min.js" type="text/javascript"></script>
     </head>
-
-    <body>
-        <div id="canvas-holder" style="width:100%">
-            <!--<canvas id="chart-area" />-->
-            <canvas id="myLineChart" width="740" height="200"></canvas>
+        <div id="canvas-holder" style="width:40%">
+            <canvas id="chart-area" />
         </div>
-
-
+        
         <script>
-            function drawLineChart() {
+          var dynamicData = [
+    { label: "One", value: 23 },
+    { label: "Two", value: 33 },
+    { label: "Three", value: 43 },
+    { label: "Four", value: 53 }
+];
 
-                // Add a helper to format timestamp data
-                Date.prototype.formatMMDDYYYY = function () {
-                    return (this.getMonth() + 1) +
-                            "/" + this.getDate() +
-                            "/" + this.getFullYear();
-                }
+dynamicData.forEach(function (e, i) {
+    e.color = "hsl(" + (i / dynamicData.length * 360) + ", 50%, 50%)";
+    e.highlight = "hsl(" + (i / dynamicData.length * 360) + ", 50%, 70%)";
+    // + any other code you need to make your element into a chart.js pie element
+});
 
-                var jsonData = $.ajax({
-                    url: 'http://d.microbuilder.io:8080/test/temp',
-                    dataType: 'json',
-                }).done(function (results) {
-
-                    // Split timestamp and data into separate arrays
-                    var labels = [], data = [];
-                    results["packets"].forEach(function (packet) {
-                        labels.push(new Date(packet.timestamp).formatMMDDYYYY());
-                        data.push(parseFloat(packet.payloadString));
-                    });
-
-                    // Create the chart.js data structure using 'labels' and 'data'
-                    var tempData = {
-                        labels: labels,
-                        datasets: [{
-                                fillColor: "rgba(151,187,205,0.2)",
-                                strokeColor: "rgba(151,187,205,1)",
-                                pointColor: "rgba(151,187,205,1)",
-                                pointStrokeColor: "#fff",
-                                pointHighlightFill: "#fff",
-                                pointHighlightStroke: "rgba(151,187,205,1)",
-                                data: data
-                            }]
-                    };
-
-                    // Get the context of the canvas element we want to select
-                    var ctx = document.getElementById("myLineChart").getContext("2d");
-
-                    // Instantiate a new chart
-                    var myLineChart = new Chart(ctx).Line(tempData, {
-                        //bezierCurve: false
-                    });
-                });
-            }
-
-            drawLineChart();
+var ctx = document.getElementById("myChart").getContext("2d");
+var myPieChart = new Chart(ctx).Pie(dynamicData);
         </script>
+
     </body>
 </html>
