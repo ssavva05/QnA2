@@ -5,8 +5,6 @@ if (empty($temptab)) {
     return header("location:../index.php");
 } else {
 
-
-
 //setting header to json
     header('Content-Type: application/json');
 
@@ -33,52 +31,44 @@ if (empty($temptab)) {
     if (!$mysqli) {
         die("Connection failed: " . $mysqli->error);
     }
-
 //query to get data from the table
-    $query = sprintf("SELECT textofanswer FROM " . $tbl_quest . " WHERE lid =" . $lid);
-
+    $query = sprintf("SELECT qid,textofanswer FROM " . $tbl_quest . " WHERE lid =" . $lid);
 //execute query
     $result = $mysqli->query($query);
+    $data2 = array();
 
-//loop through the returned data
-    /*$data = array();
-    foreach ($result as $row) {
+    $i = 0;
 
-        $query2 = sprintf("SELECT count FROM " . $tbl_ans . " WHERE lid =" . $lid . " AND textofanswer=" . $data['textofanswer']);
-        $result2 = $mysqli->query($query2);
-        $temp = 0;
-        $data2 = array();
-        foreach ($result2 as $row2) {
-            $data2[] = $row2;
-            $temp = $data2['count'];
-        }
-
-        $temp = $temp / sizeof($result);
-        print_r($temp);
-        $data[] = $row;
-        print_r($data);
-    }*/
-    
     foreach ($result as $key => $value) {
 
-        print_r($value['textofanswer']);
-        $query2 = sprintf("SELECT count FROM " . $tbl_ans . " WHERE lid =" . $lid . " AND textofanswer='" . $value['textofanswer']."'");
+
+        $query2 = sprintf("SELECT counter,qid FROM `" . $tbl_ans . "` WHERE qid = " . $value['qid'] . " AND textofanswer = '" . $value['textofanswer'] . "'");
+//execute query
         $result2 = $mysqli->query($query2);
+
         $temp = 0;
-        $data2 = array();
-        
-        print_r($result2);
-        foreach ($result2 as $row2) {
-            $data2[] = $row2;
-            $temp = $data2['count'];
+
+        foreach ($result2 as $key2 => $value2) {
+            $query3 = sprintf("SELECT textofquestion FROM `" . $tbl_quest . "` WHERE qid = " . $value['qid']);
+            $result3 = $mysqli->query($query3);
+            foreach ($result3 as $key3 => $value3) {
+                $value2['qid'] = $value3['textofquestion'];
+            }
+            $data2[] = $value2;
         }
 
-        $temp = $temp / sizeof($result);
-        print_r($temp);
-        //$data[] = $row;
-       // print_r($data);
+        $result2->close();
     }
 
+
+    $data2 = array_map(function($tag) {
+        return array(
+            'counter' => $tag['counter'],
+            'textofquestion' => $tag['qid']
+        );
+    }, $data2);
+
+    //print_r($data2);
 //free memory associated with result
     $result->close();
 
@@ -88,6 +78,6 @@ if (empty($temptab)) {
     unset($_POST);
 //now print the data
     //bridge
-    //print json_encode($data);
+    print json_encode($data2);
     //kaleis to consumer to js
 }

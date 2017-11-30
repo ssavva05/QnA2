@@ -25,9 +25,15 @@ if (empty($temptab)) {
 }
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
+        <meta charset="utf-8">
         <title>Chart</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Bootstrap -->
+        <link href="../css/bootstrap.css" rel="stylesheet" type="text/css">
+        <link href="./css/style.css" rel="stylesheet" type="text/css">
+        <link href="./css/toggle.css" rel="stylesheet" type="text/css">
         <style type="text/css">
             #chart-container {
                 width: auto;
@@ -35,6 +41,12 @@ if (empty($temptab)) {
             }
         </style>
     </head>
+
+    <div class="row">
+        <div class="col-md-3 col-md-offset-3">
+            <h1> Lecture Results</h1>
+        </div>
+    </div>
     <body>
         <div id="chart-container">
             <canvas id="mycanvas"></canvas>
@@ -43,9 +55,12 @@ if (empty($temptab)) {
         <!-- javascript -->
         <script type="text/javascript" src="js/jquery.min.js"></script>
         <script type="text/javascript" src="js/Chart.min.js"></script>
-        <!--<script type="text/javascript" src="js/app.js"></script>-->
+
+<!--<script type="text/javascript" src="js/app.js"></script>-->
+
 
         <script>
+
 
             function getRandomColor() {
                 var letters = '0123456789ABCDEF';
@@ -70,7 +85,7 @@ if (empty($temptab)) {
 
 
                         for (var i in data) {
-                            player.push("Answer:" + data[i].textofanswer);
+                            player.push("Answer: " + data[i].textofquestion);
                             score.push(data[i].counter);
                             color.push(getRandomColor());
                         }
@@ -79,7 +94,7 @@ if (empty($temptab)) {
                             labels: player,
                             datasets: [
                                 {
-                                    label: 'Player Score',
+                                    label: 'Number of Correct Answers',
                                     backgroundColor: color,
                                     borderColor: 'rgba(200, 200, 200, 0.75)',
                                     hoverBackgroundColor: 'rgba(200, 200, 200, 1)',
@@ -92,8 +107,17 @@ if (empty($temptab)) {
                         var ctx = $("#mycanvas");
 
                         var barGraph = new Chart(ctx, {
-                            type: 'pie',
-                            data: chartdata
+                            type: 'bar',
+                            data: chartdata,
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                            ticks: {
+                                                beginAtZero: true
+                                            }
+                                        }]
+                                }
+                            }
                         });
                     },
                     error: function (data) {
@@ -101,6 +125,7 @@ if (empty($temptab)) {
                     }
                 });
             });
+
 
         </script>
 

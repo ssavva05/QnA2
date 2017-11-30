@@ -50,7 +50,7 @@ try {
     <body>
         <div class="container">
             <div class="row">
-                <div class="col-md-2 col-md-offset-5">
+                <div class="col-md-3 col-md-offset-3">
                     <h1> Choose Result to view</h1>
                 </div>
             </div>
@@ -120,10 +120,10 @@ try {
 
 
             <div class="col-xs-1 col-xs-offset-2 "><div class= "v1">
-                    <form id="checkform" action="lecdata.php"  method="post">
+                    <form id="checkform2" action="lecchart.php"  method="post">
                         <div class ="row" >
                             <input type="hidden" name=<?= $lectureID ?> value=<?= $lectureID ?>>
-                            <button type="button" type="submit" class="btn btn-info active btn-lg" onclick="">Show Overall lecture Statistics  </button>
+                            <input type="submit" class="btn btn-info active btn-lg" value="Show Overall lecture Statistics">
                         </div>
                     </form>
                     <br />
