@@ -50,8 +50,8 @@ try {
     <body>
         <div class="container">
             <div class="row">
-                <div class="col-md-3 col-md-offset-3">
-                    <h1> Choose Result to view</h1>
+                <div class="col-md-3 col-md-offset-5">
+                    <h1>Results</h1>
                 </div>
             </div>
 
@@ -102,7 +102,7 @@ try {
 
                                 <div class="col-md-3">
                                     <input type="hidden" name=<?= $tqid ?> value=<?= $tqid ?>>
-                                    <input class="btn btn-success active btn-lg" type="submit" value="Show Statisctics">
+                                    <input class="btn btn-success active btn-lg" type="submit" value="Results">
                                 </div>
 
                             </div>
@@ -116,14 +116,14 @@ try {
             ?>
 
 
-
+            <hr />
 
 
             <div class="col-xs-1 col-xs-offset-2 "><div class= "v1">
                     <form id="checkform2" action="lecchart.php"  method="post">
                         <div class ="row" >
                             <input type="hidden" name=<?= $lectureID ?> value=<?= $lectureID ?>>
-                            <input type="submit" class="btn btn-info active btn-lg" value="Show Overall lecture Statistics">
+                            <input type="submit" class="btn btn-info active btn-lg" value="Overall Lecture Statistics">
                         </div>
                     </form>
                     <br />

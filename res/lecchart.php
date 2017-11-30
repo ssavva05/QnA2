@@ -43,7 +43,7 @@ if (empty($temptab)) {
     </head>
 
     <div class="row">
-        <div class="col-md-3 col-md-offset-3">
+        <div class="col-md-3 col-md-offset-5">
             <h1> Lecture Results</h1>
         </div>
     </div>
@@ -85,7 +85,7 @@ if (empty($temptab)) {
 
 
                         for (var i in data) {
-                            player.push("Answer: " + data[i].textofquestion);
+                            player.push("Q:  " + data[i].textofquestion);
                             score.push(data[i].counter);
                             color.push(getRandomColor());
                         }
@@ -107,11 +107,17 @@ if (empty($temptab)) {
                         var ctx = $("#mycanvas");
 
                         var barGraph = new Chart(ctx, {
-                            type: 'bar',
+                            type: 'horizontalBar',
                             data: chartdata,
                             options: {
+                                responsive: true,
                                 scales: {
                                     yAxes: [{
+                                            ticks: {
+                                                beginAtZero: false
+                                            }
+                                        }],
+                                    xAxes: [{
                                             ticks: {
                                                 beginAtZero: true
                                             }
