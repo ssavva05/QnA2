@@ -54,6 +54,7 @@ UNIQUE KEY UNIQUE3 (qidd),
 
 CREATE TABLE IF NOT EXISTS Answer(
     aid int,
+    qidd int,
     aidd int NOT NULL AUTO_INCREMENT,
     qid int,
     lid int,
@@ -65,6 +66,9 @@ UNIQUE KEY UNIQUE2 (aidd),
         ON DELETE CASCADE
 		ON UPDATE CASCADE,
  FOREIGN KEY (lid) REFERENCES Lecture(lid)
+        ON DELETE CASCADE
+		ON UPDATE CASCADE,
+ FOREIGN KEY (qidd) REFERENCES Question(qidd)
         ON DELETE CASCADE
 		ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
