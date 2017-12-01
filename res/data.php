@@ -16,11 +16,11 @@ if (empty($temptab)) {
 //print_r($temptab);
 
     foreach ($temptab as $key => $value) {
-        $qid = $value;
+        $qidd = $value;
     }
 
   
-    //$stmt = $db->conn->prepare("SELECT textofanswer, counter FROM " . $tbl_ans . " WHERE qid = :quesID ORDER BY qid");
+    //$stmt = $db->conn->prepare("SELECT textofanswer, counter FROM " . $tbl_ans . " WHERE qidd = :quesID ORDER BY qidd");
    
  
 
@@ -38,7 +38,7 @@ if (empty($temptab)) {
     }
 
 //query to get data from the table
-    $query = sprintf("SELECT textofanswer, counter FROM " . $tbl_ans . " WHERE qid =".$qid);
+    $query = sprintf("SELECT textofanswer, counter FROM " . $tbl_ans . " WHERE qidd =".$qidd);
 
 //execute query
     $result = $mysqli->query($query);

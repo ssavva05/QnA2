@@ -18,7 +18,7 @@ if (empty($temptab)) {
     }
 
 
-    //$stmt = $db->conn->prepare("SELECT textofanswer, counter FROM " . $tbl_ans . " WHERE qid = :quesID ORDER BY qid");
+    //$stmt = $db->conn->prepare("SELECT textofanswer, counter FROM " . $tbl_ans . " WHERE qidd = :quesID ORDER BY qidd");
 //database
     define('DB_HOST', 'localhost');
     define('DB_USERNAME', 'root');
@@ -32,7 +32,7 @@ if (empty($temptab)) {
         die("Connection failed: " . $mysqli->error);
     }
 //query to get data from the table
-    $query = sprintf("SELECT qid,textofanswer FROM " . $tbl_quest . " WHERE lid =" . $lid);
+    $query = sprintf("SELECT qidd,textofanswer FROM " . $tbl_quest . " WHERE lid =" . $lid);
 //execute query
     $result = $mysqli->query($query);
     $data2 = array();
@@ -42,17 +42,17 @@ if (empty($temptab)) {
     foreach ($result as $key => $value) {
 
 
-        $query2 = sprintf("SELECT counter,qid FROM `" . $tbl_ans . "` WHERE qid = " . $value['qid'] . " AND textofanswer = '" . $value['textofanswer'] . "'");
+        $query2 = sprintf("SELECT counter,qidd FROM `" . $tbl_ans . "` WHERE qidd = " . $value['qidd'] . " AND textofanswer = '" . $value['textofanswer'] . "'");
 //execute query
         $result2 = $mysqli->query($query2);
 
         $temp = 0;
 
         foreach ($result2 as $key2 => $value2) {
-            $query3 = sprintf("SELECT textofquestion FROM `" . $tbl_quest . "` WHERE qid = " . $value['qid']);
+            $query3 = sprintf("SELECT textofquestion FROM `" . $tbl_quest . "` WHERE qidd = " . $value['qidd']);
             $result3 = $mysqli->query($query3);
             foreach ($result3 as $key3 => $value3) {
-                $value2['qid'] = $value3['textofquestion'];
+                $value2['qidd'] = $value3['textofquestion'];
             }
             $data2[] = $value2;
         }
@@ -64,7 +64,7 @@ if (empty($temptab)) {
     $data2 = array_map(function($tag) {
         return array(
             'counter' => $tag['counter'],
-            'textofquestion' => $tag['qid']
+            'textofquestion' => $tag['qidd']
         );
     }, $data2);
 

@@ -60,9 +60,9 @@ try {
 
 
             <?php
-// SELECT qid,textofquestion,seen,textofanswer FROM `question` WHERE lid=1 
+// SELECT qidd,textofquestion,seen,textofanswer FROM `question` WHERE lid=1 
 //Find specific results for each question    
-            $stmt = $db->conn->prepare("SELECT qid,textofquestion,seen,textofanswer  FROM " . $tbl_quest . " WHERE lid = :lectureID");
+            $stmt = $db->conn->prepare("SELECT qidd,textofquestion,seen,textofanswer  FROM " . $tbl_quest . " WHERE lid = :lectureID");
             $stmt->bindParam(':lectureID', $lectureID);
             $stmt->execute();
 
@@ -75,7 +75,7 @@ try {
 
             <?php
             while ($result != NULL && $result != "" && $result != " " && (isset($result))) {
-                $tqid;
+                $tqidd;
                 $temp = new ArrayObject();
                 foreach ($result as $key => $value) {
                     $i++;
@@ -84,7 +84,7 @@ try {
                     $temp[$key] = $value;
 
                     if ($i == 1) {
-                        $tqid = $value;
+                        $tqidd = $value;
                     }
 
                     if ($i == 4) {
@@ -101,7 +101,7 @@ try {
                                 </div>
 
                                 <div class="col-md-3">
-                                    <input type="hidden" name=<?= $tqid ?> value=<?= $tqid ?>>
+                                    <input type="hidden" name=<?= $tqidd ?> value=<?= $tqidd ?>>
                                     <input class="btn btn-success active btn-lg" type="submit" value="Results">
                                 </div>
 

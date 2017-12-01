@@ -20,7 +20,7 @@ if (empty($temptab)) {
 //print_r($temptab);
 
     foreach ($temptab as $key => $value) {
-        $qid = $value;
+        $qidd = $value;
     }
 }
 
@@ -46,8 +46,8 @@ try {
     die('Database connection error');
 }
 
-$stmt = $db->conn->prepare("SELECT textofquestion,textofanswer  FROM " . $tbl_quest . " WHERE qid = :qID");
-$stmt->bindParam(':qID', $qid);
+$stmt = $db->conn->prepare("SELECT textofquestion,textofanswer  FROM " . $tbl_quest . " WHERE qidd = :qID");
+$stmt->bindParam(':qID', $qidd);
 $stmt->execute();
 
 // Gets query result
@@ -134,7 +134,7 @@ $result = $stmt->fetch(PDO::FETCH_ASSOC);
             $.ajax({
                 url: "http://localhost/QnA/res/data.php",
                 method: "POST",
-<?= "data : {" . $qid . " : " . $qid . "}," ?>
+<?= "data : {" . $qidd . " : " . $qidd . "}," ?>
 
                 success: function (data) {
                     //console.log(data);

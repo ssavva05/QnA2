@@ -74,7 +74,7 @@ try {
                     // $arr[3] will be updated with each value from $arr...
                     //echo "{$key} => {$value} \n";
 
-                    $stmt = $db->conn->prepare("UPDATE " . $tbl_quest . " SET seen= :seenD WHERE qid = :qidD");
+                    $stmt = $db->conn->prepare("UPDATE " . $tbl_quest . " SET seen= :seenD WHERE qidd = :qidD");
                     $stmt->bindParam(':qidD', $key );
                     $stmt->bindParam(':seenD', $value );
                     $stmt->execute();
@@ -88,9 +88,9 @@ try {
 
 
 <?php
-// SELECT qid,textofquestion,seen,textofanswer FROM `question` WHERE lid=1 
+// SELECT qidd,textofquestion,seen,textofanswer FROM `question` WHERE lid=1 
 //Find specific results for each question    
-$stmt = $db->conn->prepare("SELECT qid,textofquestion,seen,textofanswer  FROM " . $tbl_quest . " WHERE lid = :lectureID");
+$stmt = $db->conn->prepare("SELECT qidd,textofquestion,seen,textofanswer  FROM " . $tbl_quest . " WHERE lid = :lectureID");
 $stmt->bindParam(':lectureID', $lectureID);
 $stmt->execute();
 
@@ -128,8 +128,8 @@ while ($result != NULL && $result != "" && $result != " " && (isset($result))) {
                 ?>
                                     <div class="col-md-3">
                                         <label class="switch">
-                                            <input type='hidden' value='0' name =<?= $temp['qid'] ?>>
-                                            <input type="checkbox" value='1' name =<?= $temp['qid'] ?> checked="checked" id=<?= $temp['qid'] ?>>
+                                            <input type='hidden' value='0' name =<?= $temp['qidd'] ?>>
+                                            <input type="checkbox" value='1' name =<?= $temp['qidd'] ?> checked="checked" id=<?= $temp['qidd'] ?>>
                                             <span class="slider round"></span>
                                         </label>
                                     </div>
@@ -140,8 +140,8 @@ while ($result != NULL && $result != "" && $result != " " && (isset($result))) {
                 ?>
                                     <div class="col-md-3">
                                         <label class="switch">
-                                            <input type='hidden' value='0' name =<?= $temp['qid'] ?>>
-                                            <input type="checkbox" value='1' name=<?= $temp['qid'] ?> id=<?= $temp['qid'] ?>>
+                                            <input type='hidden' value='0' name =<?= $temp['qidd'] ?>>
+                                            <input type="checkbox" value='1' name=<?= $temp['qidd'] ?> id=<?= $temp['qidd'] ?>>
                                             <span class="slider round"></span>
                                         </label>
                                     </div>
