@@ -62,6 +62,7 @@ require('layout/header.php');
 					  $_SESSION['dateof']=$dateof;
 					  echo  "<script> window.location.href='LectureForm.php';</script>";
 				}
+                                
 				if(isset($_POST['deletion']))
 					if(!isset($_POST['radio']))
 						echo '<p class="bg-danger">'."You have to select a lecture".'</p>';
@@ -76,11 +77,24 @@ require('layout/header.php');
 				  echo  "<script> window.location.href='lectures.php';</script>";
 				 }
 				}
+                                if(isset($_POST['lectureresults']))
+					if(!isset($_POST['radio']))
+						echo '<p class="bg-danger">'."You have to select a lecture".'</p>';
+				 
+				 
+		    if(isset($_POST['lectureresults'])){
+				 if(isset($_POST['radio'])){
+				  $lid=$_POST['radio'];
+                                  $_SESSION['lid']=$lid;
+				  echo  "<script> window.location.href='res/result.php';</script>";
+				 }
+				}
 				
 				?>
 				<input name="addlecture" type="submit" value="Add Lecture">
 				<input name="deletion" type="submit" value="Delete Lecture" >
 			    <input name="startlecture" type="submit" value="Start Lecture">
+                            <input name="lectureresults" type="submit" value="Lecture Results">
 			    <input name="editquestions" type="submit" value="Edit Questions">
 				
 		</form>

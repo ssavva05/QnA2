@@ -1,20 +1,20 @@
 
 <?php
 //I WILL PUT THIS HEADER ON TOP OF EACH UNIQUE PAGE
-session_start();
+//session_start();
 
 //if (!isset($_SESSION['username'])||!isset($_SESSION['lid'])) {
 //    return header("location:../index.php");
 //}
-//if (!isset($_SESSION['lid'])) {
-//    return header("location:../index.php");
-//}
+if (!isset($_SESSION['lid'])) {
+    return header("location:../index.php");
+}
 ///make the result making page
 $tbl_quest = "question";
 $tbl_ans = "answer";
 
-//$lectureID = $_SESSION['lid']; /////Fix it afterwards
-$lectureID = 1;
+$lectureID = $_SESSION['lid']; /////Fix it afterwards
+//$lectureID = 1;
 
 $db = new \stdClass();
 $db->host = "localhost"; // Host name
