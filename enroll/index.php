@@ -24,7 +24,7 @@
 			<?php foreach($arr as $i){?>
 			<li> question <?php echo $j; $j++; ?>  <button onclick="check(<?php echo $j;?>,<?php echo json_encode($arr1);?>)">GO</button></li>
 			<?php } ?>
-        <div class="alert alert-success">You have been <strong> enrolled </strong>.</div>
+       <!-- <div class="alert alert-success">You have been <strong> enrolled </strong>.</div>-->
         <a href="enroll/logout.php" class="btn btn-default btn-lg btn-block">Exit</a>
       </div>
     </div>
@@ -37,9 +37,8 @@ function check(j,arr1){
 	if(!arr1[k]){
 		alert("Question is not Active!");
 	}else{
-		window.location.href='question.php?var=<?php echo $i ?>&var1=<?php echo $j-1 ?>';
+                k=k+1;
+		window.location.href='question.php?var='+k+'&var1='+k;
 	}
 };		
 </script>
-
-

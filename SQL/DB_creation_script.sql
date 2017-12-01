@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS Lecture(
     qcounter int,
 	dateof date,
 	enroll_key varchar(20),
-	active BIT NOT NULL DEFAULT b'0',
+	active BIT NOT NULL DEFAULT b'1',
 	mod_timestamp timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	UNIQUE KEY enrollKey_UNIQUE (enroll_key),
     PRIMARY KEY(lid),
@@ -38,13 +38,15 @@ CREATE TABLE IF NOT EXISTS Lecture(
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 CREATE TABLE IF NOT EXISTS Question(
-    qid int,
+    qid int ,
+    qidd int NOT NULL AUTO_INCREMENT,
     lid int,
-    seen int,
+    seen int DEFAULT '0',
     textofquestion text,
     acounter int,
     textofanswer	text,
-    PRIMARY KEY(qid),
+UNIQUE KEY UNIQUE3 (qidd),
+    PRIMARY KEY(qid,lid),
     FOREIGN KEY (lid) REFERENCES Lecture(lid)
         ON DELETE CASCADE
 		ON UPDATE CASCADE
@@ -52,11 +54,17 @@ CREATE TABLE IF NOT EXISTS Question(
 
 CREATE TABLE IF NOT EXISTS Answer(
     aid int,
+    aidd int NOT NULL AUTO_INCREMENT,
     qid int,
+    lid int,
     textofanswer text,
-    counter int,
-    PRIMARY KEY(aid),
+    counter int DEFAULT '0',
+    PRIMARY KEY(aid,qid,lid),
+UNIQUE KEY UNIQUE2 (aidd),
     FOREIGN KEY (qid) REFERENCES Question(qid)
+        ON DELETE CASCADE
+		ON UPDATE CASCADE,
+ FOREIGN KEY (lid) REFERENCES Lecture(lid)
         ON DELETE CASCADE
 		ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;

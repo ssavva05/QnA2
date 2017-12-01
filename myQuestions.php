@@ -29,7 +29,7 @@ $totalans=$_GET['totalans'];
 			<?php $i++;?>
 		<?php } ?>
 		<br>
-		<input type="button" onclick="addQuestion(<?php echo $question;?>,<?php echo $totalans;?>)" value="Add Question">
+		<input type="button" onclick="addQuestion(<?php echo $lid;?>,<?php echo $ltitle;?>,<?php echo $question;?>,<?php echo $totalans;?>)" value="Add Question">
 		<!--<input type="button" onclick="editQuestion(<?php echo $question; ?>,<?php echo $totalans;?>)" value="Edit Question">-->
 		<input type="submit" name="submit" value="Edit Question">
 		<input type="submit" name="delete" value="Delete Question">
@@ -40,7 +40,7 @@ $totalans=$_GET['totalans'];
 <?php 
 if(isset($_POST['submit'])){
 			if(isset($_POST['radioQuestion'])){ ?>
-			<script> editQuestion(<?php echo $_POST['radioQuestion'];?>,<?php echo $totalans;?>);</script>
+			<script> editQuestion(<?php echo $lid;?>,<?php echo $ltitle;?>,<?php echo $_POST['radioQuestion'];?>,<?php echo $totalans;?>);</script>
 			<?php }else 
 						echo "<script>alert(\"Attention: you have to select question first !\");</script>";
 			

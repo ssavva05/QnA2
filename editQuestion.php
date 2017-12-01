@@ -140,19 +140,23 @@ if($answer==-1){
 			if(isset($_POST['radioAnswer'])){
 				$question++;
 				$answerValue=$_POST[$_POST['radioAnswer']];
-				$stmt = $db->prepare('INSERT INTO question (qid, textofquestion, textofanswer, acounter) values (:qid,:tq,:ta,:ca);');
+				$stmt = $db->prepare('INSERT INTO question (qid, textofquestion, lid,textofanswer, acounter) values (:qid,:tq,:lid,:ta,:ca);');
 				$stmt->bindParam(':qid',$question);
 				$stmt->bindParam(':tq',$_POST['questionbody']);
 				$stmt->bindParam(':ta',$answerValue);
 				$stmt->bindParam(':ca',$i);
+                                $stmt->bindParam(':lid',$qid);
+                                $id = $db->lastInsertId('qidd');
 				$stmt->execute();
 				
 				for($j=1; $j<=$answer; $j++){
 					$ansid=$j+$totalans;
-					$stmt = $db->prepare('INSERT INTO answer (aid,qid,textofanswer) values (:aid,:qid,:ta);');
+					$stmt = $db->prepare('INSERT INTO answer (aid,qid,textofanswer,lid) values (:aid,:qid,:ta,:lid);');
 					$stmt->bindParam(':aid',$ansid);
 					$stmt->bindParam(':qid',$question);
 					$stmt->bindParam(':ta',$_POST[$j]);
+                                        $stmt->bindParam(':lid',$qid);
+                                        $id = $db->lastInsertId('aidd');
 					$stmt->execute();
 				}
 				
@@ -191,10 +195,12 @@ if($answer==-1){
 				
 				for($j=1; $j<=$answer; $j++){
 					$ansid=$j+$totalans;
-					$stmt = $db->prepare('INSERT INTO answer (aid,qid,textofanswer) values (:aid,:qid,:ta);');
+					$stmt = $db->prepare('INSERT INTO answer (aid,qid,textofanswer,lid) values (:aid,:qid,:ta,:lid);');
 					$stmt->bindParam(':aid',$ansid);
 					$stmt->bindParam(':qid',$question);
 					$stmt->bindParam(':ta',$_POST[$j]);
+                                        $stmt->bindParam(':lid',$qid);
+                                        $id = $db->lastInsertId('aidd');
 					$stmt->execute();
 				}
 				?>

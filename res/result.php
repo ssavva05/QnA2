@@ -1,7 +1,7 @@
 
 <?php
 //I WILL PUT THIS HEADER ON TOP OF EACH UNIQUE PAGE
-//session_start();
+session_start();
 
 //if (!isset($_SESSION['username'])||!isset($_SESSION['lid'])) {
 //    return header("location:../index.php");

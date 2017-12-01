@@ -41,10 +41,22 @@ require('layout/header.php');
 				
 			if(isset($_POST['editquestions'])){
 				 if(isset($_POST['radio'])){
-					  $_SESSION['lid']=$_POST['radio'];
-					  echo  "<script> window.location.href='myQuestions.php';</script>";
-
-				  }
+					  $_SESSION['lid']=$_POST['radio']; 
+                                           $stmt = $db->prepare('SELECT lname FROM Lecture WHERE lid = :lid');
+                                          $stmt->bindParam(':lid', $_SESSION['lid']);
+                                             $stmt->execute();
+                                          $result=$stmt->fetch(PDO::FETCH_ASSOC);
+                                        $var1=$result['lname'];
+                                          /*$stmt = $db->prepare('SELECT MAX(qid) FROM question WHERE lid = : lid');
+                                          $stmt->bindParam(':lid', $_SESSION['lid']);
+                                             $stmt->execute();
+                                          $result=$stmt->fetch(PDO::FETCH_ASSOC);
+                                        $qc=$result['qid'];*/
+                                            header("Location:myQuestions.php?var=".$_SESSION['lid']."&var1=".$var1."&question=0&totalans=0");
+                                       
+                              
+                               
+                                 }
 				}
 				if(isset($_POST['startlecture']))
 					if(!isset($_POST['radio']))
