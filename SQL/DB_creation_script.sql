@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS members (
   email varchar(255) NOT NULL,
   active varchar(255) NOT NULL,
   PRIMARY KEY (memberID)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 
 CREATE TABLE IF NOT EXISTS Course(
@@ -15,31 +15,40 @@ CREATE TABLE IF NOT EXISTS Course(
     memberID int(11), 
     dateof date,
     PRIMARY KEY(cname,dateof),
-    CONSTRAINT FOREIGN KEY (memberID) REFERENCES Professor(memberID)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+    CONSTRAINT FOREIGN KEY (memberID) REFERENCES members(memberID)
+    ON DELETE CASCADE
+	ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 CREATE TABLE IF NOT EXISTS Lecture(
-    lid int,
+    lid int(11) NOT NULL AUTO_INCREMENT,
+	lname varchar(20),
     cname varchar(10),
+    qcounter int,
 	dateof date,
-	`enroll_key` varchar(20),
-	`active` BIT NOT NULL DEFAULT b'0',
-	`mod_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-	UNIQUE KEY `enrollKey_UNIQUE` (`enroll_key`),
+	enroll_key varchar(20),
+	active BIT NOT NULL DEFAULT b'0',
+	mod_timestamp timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	UNIQUE KEY enrollKey_UNIQUE (enroll_key),
     PRIMARY KEY(lid),
-    CONSTRAINT FOREIGN KEY (cname) REFERENCES Course(cname),
-	CONSTRAINT FOREIGN KEY (dateof) REFERENCES Course(dateof)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+    CONSTRAINT FOREIGN KEY (cname,dateof) REFERENCES Course(cname,dateof)
+        ON DELETE CASCADE
+		ON UPDATE CASCADE
+	
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 CREATE TABLE IF NOT EXISTS Question(
     qid int,
     lid int,
     seen int,
     textofquestion text,
+    acounter int,
     textofanswer	text,
     PRIMARY KEY(qid),
     FOREIGN KEY (lid) REFERENCES Lecture(lid)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+        ON DELETE CASCADE
+		ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 CREATE TABLE IF NOT EXISTS Answer(
     aid int,
@@ -48,7 +57,9 @@ CREATE TABLE IF NOT EXISTS Answer(
     counter int,
     PRIMARY KEY(aid),
     FOREIGN KEY (qid) REFERENCES Question(qid)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+        ON DELETE CASCADE
+		ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 CREATE TABLE IF NOT EXISTS `loginAttemptsStudents` (
   `IP` varchar(20) NOT NULL,
@@ -57,5 +68,4 @@ CREATE TABLE IF NOT EXISTS `loginAttemptsStudents` (
   `enroll_key` varchar(20) DEFAULT NULL,
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`ID`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
