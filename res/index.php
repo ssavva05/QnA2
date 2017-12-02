@@ -72,7 +72,7 @@ try {
                     <div class="navbar-header">
                         <!--<a class="navbar-brand" href="#"></a>-->
 
-                        <button type="button" class="btn btn-lg btn-danger navbar-btn  active v1" onclick="rback()"> Back </button>
+                        <button type="button" class="btn btn-lg btn-danger navbar-btn  active v1" onclick="rback();"> Back </button>
                         <div class="divider"></div>
                         <button type="button" onclick="apply();" class="btn btn-lg btn-success navbar-btn active " > Apply </button>
 

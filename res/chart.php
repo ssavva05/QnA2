@@ -84,7 +84,7 @@ $result = $stmt->fetch(PDO::FETCH_ASSOC);
                     <div class="navbar-header">
                         <!--<a class="navbar-brand" href="#"></a>-->
 
-                        <button type="button" class="btn btn-lg btn-danger navbar-btn  active v1" onclick="rback()"> Back </button>
+                        <button type="button" class="btn btn-lg btn-danger navbar-btn  active v1" onclick="rback();"> Back </button>
 
 
                     </div>
