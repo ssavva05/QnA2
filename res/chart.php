@@ -63,125 +63,153 @@ $result = $stmt->fetch(PDO::FETCH_ASSOC);
         <link href="../css/bootstrap.css" rel="stylesheet" type="text/css">
         <link href="./css/style.css" rel="stylesheet" type="text/css">
         <link href="./css/toggle.css" rel="stylesheet" type="text/css">
-        <style type="text/css">
-            #chart-container {
-                width: auto;
-                height: auto;
+        <link href="./css/custom.css" rel="stylesheet" type="text/css">
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="js/Chart.min.js"></script>
+        <script>
+            function rback() {
+                window.location.href = 'result.php';
             }
-        </style>
+        </script>
+
 
     </head>
 
+    <body>
 
-    <div class="row">
-        <div class="col-md-3 col-md-offset-5">
-            <h1> Question Results </h1>
-        </div>
-    </div>
-    <hr />
-    <?php
-    $z = 0;
-    foreach ($result as $key => $value) {
-        //echo ($value);
 
-        if ($z == 0) {
-            ?>
+        <div class="container">
+            <nav class="navbar navbar-fixed-top">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <!--<a class="navbar-brand" href="#"></a>-->
+
+                        <button type="button" class="btn btn-lg btn-danger navbar-btn  active v1" onclick="rback()"> Back </button>
+
+
+                    </div>
+                </div>
+            </nav> 
+            <br />
             <div class="row">
-                <div class="col-md-3 col-md-offset-5">
-                    <h3>Question: <?= $value ?></h3>  
+                <div class="col-md-3 col-md-offset-4">
+                    <!-- <h1>Question Result</h1>-->
+                    <img src="img/qr.png" alt="Question Result" width="100%">
                 </div>
             </div>
+
+            <hr />
             <?php
-            $z++;
-        } else {
-            ?>
-            <div class="row">
-                <div class="col-md-3 col-md-offset-5">
-                    <h3>Correct Answer:<?= $value ?></h3>
-                </div>
-            </div>
-            <?php
-        }
-    }
-    ?>
+            $z = 0;
+            foreach ($result as $key => $value) {
+                //echo ($value);
 
-    <?php
-    unset($result);
-    ?>
-
-    <hr />
-    <div id="chart-container">
-        <canvas id="mycanvas"></canvas>
-    </div>
-
-    <!-- javascript -->
-    <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/Chart.min.js"></script>
-    <!--<script type="text/javascript" src="js/app.js"></script>-->
-
-    <script>
-
-        function getRandomColor() {
-            var letters = '0123456789ABCDEF';
-            var color = '#';
-            for (var i = 0; i < 6; i++) {
-                color += letters[Math.floor(Math.random() * 16)];
+                if ($z == 0) {
+                    ?>
+                    <div class="row">
+                        <div class="col-md-3 col-md-offset-4">
+                            <h4>Question: <?= $value ?></h4>  
+                        </div>
+                    </div>
+                    <?php
+                    $z++;
+                } else {
+                    ?>
+                    <div class="row">
+                        <div class="col-md-3 col-md-offset-4">
+                            <h4>Correct Answer: <?= $value ?></h4>
+                        </div>
+                    </div>
+                    <?php
+                }
             }
-            return color;
-        }
+            ?>
 
-        $(document).ready(function () {
-            $.ajax({
-                url: "http://localhost/QnA/res/data.php",
-                method: "POST",
+            <?php
+            unset($result);
+            ?>
+
+            <hr />
+            <div id="chart-container">
+                <canvas id="mycanvas"></canvas>
+            </div>
+
+            <script>
+
+                function getRandomColor() {
+                    var letters = '0123456789ABCDEF';
+                    var color = '#';
+                    for (var i = 0; i < 6; i++) {
+                        color += letters[Math.floor(Math.random() * 16)];
+                    }
+                    return color;
+                }
+
+                $(document).ready(function () {
+                    $.ajax({
+                        url: "http://localhost/QnA/res/data.php",
+                        method: "POST",
 <?= "data : {" . $qidd . " : " . $qidd . "}," ?>
 
-                success: function (data) {
-                    //console.log(data);
-                    var player = [];
-                    var score = [];
-                    var color = [];
+                        success: function (data) {
+                            //console.log(data);
+                            var player = [];
+                            var score = [];
+                            var color = [];
 
 
-                    for (var i in data) {
-                        player.push("Answer: " + data[i].textofanswer);
-                        score.push(data[i].counter);
-                        color.push(getRandomColor());
-                    }
-
-                    var chartdata = {
-                        labels: player,
-                        datasets: [
-                            {
-                                label: 'Player Score',
-                                backgroundColor: color,
-                                borderColor: 'rgba(200, 200, 200, 0.75)',
-                                hoverBackgroundColor: 'rgba(200, 200, 200, 1)',
-                                hoverBorderColor: 'rgba(200, 200, 200, 1)',
-                                data: score
+                            for (var i in data) {
+                                player.push("Answer: " + data[i].textofanswer);
+                                score.push(data[i].counter);
+                                color.push(getRandomColor());
                             }
-                        ]
-                    };
 
-                    var ctx = $("#mycanvas");
+                            var chartdata = {
+                                labels: player,
+                                datasets: [
+                                    {
+                                        label: 'Player Score',
+                                        backgroundColor: color,
+                                        borderColor: 'rgba(200, 200, 200, 0.75)',
+                                        hoverBackgroundColor: 'rgba(200, 200, 200, 1)',
+                                        hoverBorderColor: 'rgba(200, 200, 200, 1)',
+                                        data: score
+                                    }
+                                ]
+                            };
 
-                    var barGraph = new Chart(ctx, {
-                        type: 'pie',
-                        data: chartdata,
-                        options: {
-                            responsive: true}
+                            var ctx = $("#mycanvas");
+
+                            var barGraph = new Chart(ctx, {
+                                type: 'pie',
+                                data: chartdata,
+                                options: {
+                                    responsive: true}
+                            });
+                        },
+                        error: function (data) {
+                            console.log(data);
+                        }
                     });
-                },
-                error: function (data) {
-                    console.log(data);
-                }
-            });
-        });
+                });
 
-    </script>
+            </script>
 
 
 
+        </div>
 
-</body>
+
+        <footer><!-- FOOTER -->
+            <div class="container">
+                <p> &emsp; &emsp; </p>
+                <p class="pull-right"><a href="#">Back to Top</a></p>
+                <?php
+                echo "&copy ";
+                echo date("Y");
+                echo "  QnA";
+                ?>
+            </div>
+        </footer>
+    </body>
 </html>

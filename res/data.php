@@ -10,7 +10,7 @@ if (empty($temptab)) {
 //setting header to json
     header('Content-Type: application/json');
 
- 
+
     $tbl_quest = "question";
     $tbl_ans = "answer";
 //print_r($temptab);
@@ -19,11 +19,8 @@ if (empty($temptab)) {
         $qidd = $value;
     }
 
-  
-    //$stmt = $db->conn->prepare("SELECT textofanswer, counter FROM " . $tbl_ans . " WHERE qidd = :quesID ORDER BY qidd");
-   
- 
 
+    //$stmt = $db->conn->prepare("SELECT textofanswer, counter FROM " . $tbl_ans . " WHERE qidd = :quesID ORDER BY qidd");
 //database
     define('DB_HOST', 'localhost');
     define('DB_USERNAME', 'root');
@@ -38,7 +35,7 @@ if (empty($temptab)) {
     }
 
 //query to get data from the table
-    $query = sprintf("SELECT textofanswer, counter FROM " . $tbl_ans . " WHERE qidd =".$qidd);
+    $query = sprintf("SELECT textofanswer, counter FROM " . $tbl_ans . " WHERE qidd =" . $qidd);
 
 //execute query
     $result = $mysqli->query($query);
@@ -60,6 +57,4 @@ if (empty($temptab)) {
     //bridge
     print json_encode($data);
     //kaleis to consumer to js
-    
-    
 }

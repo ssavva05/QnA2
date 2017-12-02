@@ -43,8 +43,7 @@ try {
         <link href="../css/bootstrap.css" rel="stylesheet" type="text/css">
         <link href="./css/style.css" rel="stylesheet" type="text/css">
         <link href="./css/toggle.css" rel="stylesheet" type="text/css">
-        <!--<script src="js/Chart.bundle.js" type="text/javascript"></script>
-        <script src="js/utils.js" type="text/javascript"></script>-->
+        <link href="./css/custom.css" rel="stylesheet" type="text/css">
         <script src="js/jquery.min.js" type="text/javascript"></script>
         <script>
             function uncheckAll() {
@@ -53,15 +52,38 @@ try {
             function checkAll() {
                 $('input[type="checkbox"]').prop('checked', true);
             }
+            function apply() {
+                document.forms["mycheckform"].submit();
+            }
+            function rback() {
+                window.location.href = '../lectures.php';
+            }
         </script>
     </head>
 
 
     <body>
         <div class="container">
+
+
+
+            <nav class="navbar navbar-fixed-top">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <!--<a class="navbar-brand" href="#"></a>-->
+
+                        <button type="button" class="btn btn-lg btn-danger navbar-btn  active v1" onclick="rback()"> Back </button>
+                        <div class="divider"></div>
+                        <button type="button" onclick="apply();" class="btn btn-lg btn-success navbar-btn active " > Apply </button>
+
+                    </div>
+                </div>
+            </nav> 
+            <br />
             <div class="row">
-                <div class="col-md-2 col-md-offset-5">
-                    <h1> Question Activation</h1>
+                <div class="col-md-3 col-md-offset-4">
+                    <!-- <h1> Question Activation</h1>-->
+                    <img src="img/qa.png" alt="Question Activation" width="100%">
                 </div>
             </div>
 
@@ -75,57 +97,76 @@ try {
                     //echo "{$key} => {$value} \n";
 
                     $stmt = $db->conn->prepare("UPDATE " . $tbl_quest . " SET seen= :seenD WHERE qidd = :qidD");
-                    $stmt->bindParam(':qidD', $key );
-                    $stmt->bindParam(':seenD', $value );
+                    $stmt->bindParam(':qidD', $key);
+                    $stmt->bindParam(':seenD', $value);
                     $stmt->execute();
                 }
 
                 unset($_POST);
-                echo  "<script> window.location.href='index.php';</script>";
+                echo "<script> window.location.href='index.php';</script>";
             }
             ?>
 
 
 
-<?php
+            <?php
 // SELECT qidd,textofquestion,seen,textofanswer FROM `question` WHERE lid=1 
 //Find specific results for each question    
-$stmt = $db->conn->prepare("SELECT qidd,textofquestion,seen,textofanswer  FROM " . $tbl_quest . " WHERE lid = :lectureID");
-$stmt->bindParam(':lectureID', $lectureID);
-$stmt->execute();
+            $stmt = $db->conn->prepare("SELECT qidd,textofquestion,seen,textofanswer  FROM " . $tbl_quest . " WHERE lid = :lectureID");
+            $stmt->bindParam(':lectureID', $lectureID);
+            $stmt->execute();
 
 // Gets query result
-$result = $stmt->fetch(PDO::FETCH_ASSOC);
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-$i = 0;
-?>
-
-            <form id="checkform" action="index.php"  method="post">
-<?php
-while ($result != NULL && $result != "" && $result != " " && (isset($result))) {
-
-    $temp = new ArrayObject();
-    foreach ($result as $key => $value) {
-        $i++;
-        //echo "Key: $key; Value: $value\n";
-        // echo($key . "=" . $value . "<br />");
-        $temp[$key] = $value;
-
-        if ($i == 4) {
-            //echo("<br />");
+            $i = 0;
             ?>
+            <hr >
+            <div class = "row">
+                <div class="col-md-3 col-md-offset-5 "><div class= "v1">
+
+                        <button type="button" class="btn btn-info active btn-lg" onclick="checkAll();">Check All </button>
+                        <div class="divider"></div>
+                        <button type="button" class="btn btn-warning active btn-lg " onclick="uncheckAll();">Un-Check All </button>
+
+                    </div>
+                </div>
+            </div>
+
+            <form id="mycheckform" action="index.php"  method="post">
+                <!--
+                                <hr >
+                                <div class ="row" >
+                                    <div class="col-xs-1 col-xs-offset-3">
+                                        <input id='mybtn' class="btn btn-success active btn-lg buttonbi" type="submit" value="Apply">
+                                    </div>
+                                </div>
+                -->
+                <?php
+                while ($result != NULL && $result != "" && $result != " " && (isset($result))) {
+
+                    $temp = new ArrayObject();
+                    foreach ($result as $key => $value) {
+                        $i++;
+                        //echo "Key: $key; Value: $value\n";
+                        // echo($key . "=" . $value . "<br />");
+                        $temp[$key] = $value;
+
+                        if ($i == 4) {
+                            //echo("<br />");
+                            ?>
                             <hr >
                             <div class ="row" >
                                 <div class="col-md-3 col-md-offset-3">
                                     <h4 class="text-justify">
-            <?= $temp['textofquestion'] ?>
+                                        <?= $temp['textofquestion'] ?>
                                     </h4>
 
                                 </div>
 
-            <?php
-            if ($temp['seen'] == 1) {
-                ?>
+                                <?php
+                                if ($temp['seen'] == 1) {
+                                    ?>
                                     <div class="col-md-3">
                                         <label class="switch">
                                             <input type='hidden' value='0' name =<?= $temp['qidd'] ?>>
@@ -135,9 +176,9 @@ while ($result != NULL && $result != "" && $result != " " && (isset($result))) {
                                     </div>
 
 
-                <?php
-            } else {
-                ?>
+                                    <?php
+                                } else {
+                                    ?>
                                     <div class="col-md-3">
                                         <label class="switch">
                                             <input type='hidden' value='0' name =<?= $temp['qidd'] ?>>
@@ -147,36 +188,46 @@ while ($result != NULL && $result != "" && $result != " " && (isset($result))) {
                                     </div>
 
 
-            <?php } ?>     
+                                <?php } ?>     
                             </div>
-                                <?php
-                                $i = 0;
-                            }
+                            <?php
+                            $i = 0;
                         }
-                        $result = $stmt->fetch(PDO::FETCH_ASSOC);
                     }
-                    ?>
+                    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                }
+                ?>
 
-                <hr >
-                <div class ="row" ></div>
-                <div class="col-xs-1 col-xs-offset-3">
-                    <input class="btn btn-success active btn-lg" type="submit" value="Apply">
-                </div>
+
             </form> 
+            <hr >
 
 
-            <div class="col-xs-1 col-xs-offset-2 "><div class= "v1">
-                    <div class ="row" >
-                        <button type="button" class="btn btn-info active btn-lg" onclick="checkAll();">Check All </button>
-                    </div>
-                    <br />
-                    <div class ="row" >
-                        <button type="button" class="btn btn-warning active btn-lg " onclick="uncheckAll();">Un-Check All </button>
-                    </div> 
-                </div>
-            </div>
+            <!--
+                        <div class="col-xs-1 col-xs-offset-2 "><div class= "v1">
+                                <div class ="row" >
+                                    <button type="button" class="btn btn-info active btn-lg" onclick="checkAll();">Check All </button>
+                                </div>
+                                <br />
+                                <div class ="row" >
+                                    <button type="button" class="btn btn-warning active btn-lg " onclick="uncheckAll();">Un-Check All </button>
+                                </div> 
+                            </div>
+                        </div>-->
 
         </div>
+
+        <footer><!-- FOOTER -->
+            <div class="container">
+                <p> &emsp; &emsp; </p>
+                <p class="pull-right"><a href="#">Back to Top</a></p>
+                <?php
+                echo "&copy ";
+                echo date("Y");
+                echo "  QnA";
+                ?>
+            </div>
+        </footer>
     </body>
 </html>
 

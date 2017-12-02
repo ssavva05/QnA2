@@ -13,7 +13,7 @@ if (!isset($_SESSION['lid'])) {
 $tbl_quest = "question";
 $tbl_ans = "answer";
 
-$lectureID = $_SESSION['lid']; /////Fix it afterwards
+$lectureID = $_SESSION['lid'];
 //$lectureID = 1;
 
 $db = new \stdClass();
@@ -43,17 +43,40 @@ try {
         <link href="../css/bootstrap.css" rel="stylesheet" type="text/css">
         <link href="./css/style.css" rel="stylesheet" type="text/css">
         <link href="./css/toggle.css" rel="stylesheet" type="text/css">
-
+        <link href="./css/custom.css" rel="stylesheet" type="text/css">
+        <script>
+            function apply() {
+                document.forms["mycheckform2"].submit();
+            }
+            function rback() {
+                window.location.href = '../lectures.php';
+            }
+        </script>
     </head>
 
 
     <body>
         <div class="container">
+            <nav class="navbar navbar-fixed-top">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <!--<a class="navbar-brand" href="#"></a>-->
+
+                        <button type="button" class="btn btn-lg btn-danger navbar-btn  active v1" onclick="rback()"> Back </button>
+                        <div class="divider"></div>
+                        <button type="button" onclick="apply();" class="btn btn-lg btn-info navbar-btn active " > Lecture Statistics </button>
+
+                    </div>
+                </div>
+            </nav> 
+            <br />
             <div class="row">
-                <div class="col-md-3 col-md-offset-5">
-                    <h1>Results</h1>
+                <div class="col-md-3 col-md-offset-4">
+                    <!-- <h1>Results</h1>-->
+                    <img src="img/res.png" alt="Results" width="100%">
                 </div>
             </div>
+
 
 
 
@@ -120,10 +143,10 @@ try {
 
 
             <div class="col-xs-1 col-xs-offset-2 "><div class= "v1">
-                    <form id="checkform2" action="lecchart.php"  method="post">
+                    <form id="mycheckform2" action="lecchart.php"  method="post">
                         <div class ="row" >
                             <input type="hidden" name=<?= $lectureID ?> value=<?= $lectureID ?>>
-                            <input type="submit" class="btn btn-info active btn-lg" value="Overall Lecture Statistics">
+                           <!-- <input type="submit" class="btn btn-info active btn-lg" value="Overall Lecture Statistics">-->
                         </div>
                     </form>
                     <br />
@@ -132,5 +155,17 @@ try {
             </div>
 
         </div>
+
+        <footer><!-- FOOTER -->
+            <div class="container">
+                <p> &emsp; &emsp; </p>
+                <p class="pull-right"><a href="#">Back to Top</a></p>
+                <?php
+                echo "&copy ";
+                echo date("Y");
+                echo "  QnA";
+                ?>
+            </div>
+        </footer>
     </body>
 </html>
