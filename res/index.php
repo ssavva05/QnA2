@@ -19,7 +19,7 @@ $lectureID = $_SESSION['lid']; /////Fix it afterwards
 $db = new \stdClass();
 $db->host = "localhost"; // Host name
 $db->username = "root"; // Mysql username
-$db->password = "epapad0!"; // Mysql password
+$db->password = "root"; // Mysql password
 $db->db_name = "qnadb"; // Database name
 //$db->tbl_lecture = $tbl_lecture;
 
