@@ -11,6 +11,7 @@ require('layout1/header.php');
 
 
 ?>
+<br >
 <form method="post">
 <fieldset>
 <legend>Please Complete the Details</legend>

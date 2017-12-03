@@ -28,12 +28,14 @@
 		<nav class="navbar navbar-fixed-top">
                 <div class="container-fluid">
                     <div class="navbar-inverse" style="color:white; font-size:150%; ">
-                       <button type="button" class="btn btn-lg btn-danger navbar-btn active v1 " onclick="rback();">Exit to enrollment</button>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp You have succesfully enroll! 
+                       <button type="button" class="btn btn-lg btn-danger navbar-btn active v1 " onclick="rback();">Exit to enrollment</button> <h4>You have successfully enroll!</h4> 
 						
 					</div>
 				</div>
 		
 		</nav>
+                <br >
+                <br >
 		<div class="row">
 		<h1>Welcome to &nbsp Course:<?php echo $result['cname']; ?> &nbsp &nbsp &nbsp Lecture:<?php echo$result['lname'];?></h1></br>
 		<ul>

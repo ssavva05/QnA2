@@ -29,12 +29,12 @@ require('layout1/header.php');
 			      $stmt->execute();
 				 while($result=$stmt->fetch(PDO::FETCH_ASSOC)){
 				 ?>
-				<input type="radio" name="radio" value="<?php echo $result["lid"];?>">
+				<h4><input type="radio" name="radio" value="<?php echo $result["lid"];?>">
 				<?php echo "Lecture: ".$result["lname"]; ?>
 				</br>
 				<?php
 				}
-				?>
+				?></h4>
 				<?php
 				if(isset($_POST['editquestions']))
 					if(!isset($_POST['radio']))

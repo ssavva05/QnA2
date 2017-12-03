@@ -26,7 +26,7 @@ require('layout1/header.php');
 					 
 				 
 				 ?>
-				<input type="radio" name="radio" value="<?php echo $result["cname"]." ".$result["dateof"];?>">
+				<h4><input type="radio" name="radio" value="<?php echo $result["cname"]." ".$result["dateof"];?>">
 				 <?php echo $result["cname"]." "; 
 				 $pieces = explode("-",
 				 $result["dateof"]); 
@@ -36,7 +36,7 @@ require('layout1/header.php');
 				     echo "Eαρινό εξάμηνο ".$pieces[0]; ?></br>
 				<?php
 				}
-				?>
+				?></h4>
 				<?php
 				if(isset($_POST['editlectures']))
 					if(!isset($_POST['radio']))
