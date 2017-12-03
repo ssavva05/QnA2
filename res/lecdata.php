@@ -22,7 +22,7 @@ if (empty($temptab)) {
 //database
     define('DB_HOST', 'localhost');
     define('DB_USERNAME', 'root');
-    define('DB_PASSWORD', 'epapad0!');
+    define('DB_PASSWORD', 'root');
     define('DB_NAME', 'qnadb');
 
 //get connection

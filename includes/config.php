@@ -8,7 +8,7 @@ session_start();
 //database credentials
 define('DBHOST','localhost');
 define('DBUSER','root');
-define('DBPASS','epapad0!');
+define('DBPASS','root');
 define('DBNAME','qnadb');
 
 try {
