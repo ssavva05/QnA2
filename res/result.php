@@ -57,7 +57,7 @@ try {
 
     <body>
         <div class="container">
-            <nav class="navbar navbar-fixed-top">
+            <nav class="navbar navbar-inverse navbar-fixed-top">
                 <div class="container-fluid">
                     <div class="navbar-header">
                         <!--<a class="navbar-brand" href="#"></a>-->
