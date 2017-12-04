@@ -18,12 +18,12 @@ require('layout1/header.php');
 		<br>
 		<br>
 		<form action="" method=post>
-		<?php while($i<=$question){ ?>
+		<h4><?php while($i<=$question){ ?>
 			<input type="radio" id="radioQuestion" name="radioQuestion" value="<?php echo $i;?>">
 			<label for = "radioQuestion">Question <?php echo $i?></label><br>
 			<?php $i++;?>
 		<?php } ?>
-		<br>
+		<br></h4>
 		<input class="btn btn-lg btn-primary navbar-btn active v1 " type="button" onclick="addQuestion(<?php echo $lid;?>,'<?php echo $ltitle;?>',<?php echo $question;?>,<?php echo $totalans;?>)" value="Add Question">
 		<input class="btn btn-lg btn-success navbar-btn active v1 " type="submit" name="submit" value="Edit Question">
 		<input class="btn btn-lg btn-danger navbar-btn active v1 " type="submit" name="delete" value="Delete Question">

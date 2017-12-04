@@ -55,7 +55,7 @@ while( $row=$stmt->fetch(PDO::FETCH_ASSOC)) {
 				</div>
 		
 		</nav>
-		<h1>Welcome to	Question <?php echo $qnum; ?>!</h1>
+		<h2><strong>Welcome to	Question <?php echo $qnum; ?>!</strong></h2>
 		<div id="countdowntimer"><span id="color_timer"></span></div>
 		<h2>Question: <?=$result1['textofquestion']?></h2>  
 		<h3>Please choose one of the following answers:</h3>

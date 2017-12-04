@@ -28,7 +28,7 @@
 		<nav class="navbar navbar-fixed-top">
                 <div class="container-fluid">
                     <div class="navbar-inverse" style="color:white; font-size:150%; ">
-                       <button type="button" class="btn btn-lg btn-danger navbar-btn active v1 " onclick="rback();">Exit to enrollment</button> <h4>You have successfully enroll!</h4> 
+                       <button type="button" class="btn btn-lg btn-danger navbar-btn active v1 " onclick="rback();">Exit to enrollment</button> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp <h4>You have successfully enroll!</h4> 
 						
 					</div>
 				</div>
@@ -37,7 +37,7 @@
                 <br >
                 <br >
 		<div class="row">
-		<h1>Welcome to &nbsp Course:<?php echo $result['cname']; ?> &nbsp &nbsp &nbsp Lecture:<?php echo$result['lname'];?></h1></br>
+		<h1>Welcome to &nbsp Course: <?php echo $result['cname']; ?></h1> <h2>&nbsp &nbsp &nbsp Lecture: <?php echo$result['lname'];?></h2></br>
 		<ul>
 			<?php foreach($arr as $i){?>
 			<li><p style="font-size:130%;"> question <?php echo $j; $j++; ?>  <button  class="btn-success btn-lg btn  active v1" onclick="check(<?php echo $i?>,<?php echo $j;?>,<?php echo json_encode($arr1);?>)">GO</button></p></li>
